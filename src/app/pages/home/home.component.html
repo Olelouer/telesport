@@ -1,3 +1,7 @@
-<h2>Olympic games app</h2>
-<hr />
-<p>{{ (olympics$ | async)?.length }} data loaded</p>
+<div *ngIf="pieChartData.length > 0">
+  <ngx-charts-pie-chart
+    [results]="pieChartData"
+    [labels]="true"
+    [animations]="true">
+  </ngx-charts-pie-chart>
+</div>
