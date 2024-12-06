@@ -1,7 +1,28 @@
+<h1>Médailles par pays</h1>
+<div>
+  <div>
+    <h2>Nombre de JOs</h2>
+    <p>{{totalCountries}}</p>
+  </div>
+  <div>
+    <h2>Nombre de pays</h2>
+    <p>{{numberOfOlympics}}</p>
+  </div>
+</div>
+
 <div *ngIf="pieChartData.length > 0">
   <ngx-charts-pie-chart
     [results]="pieChartData"
     [labels]="true"
-    [animations]="true">
+    [animations]="true"
+    [tooltipTemplate]="customTooltip"
+    (select)="selectCountry($event)">
   </ngx-charts-pie-chart>
 </div>
+
+
+<ng-template #customTooltip let-model="model">
+  <div class="custom-tooltip">
+    <strong>{{ model.name }}</strong>:
+  </div>
+</ng-template>

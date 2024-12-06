@@ -26,7 +26,24 @@ export class OlympicService {
   }
 
   // Get Olympics data as Observable
-  getOlympics(): Observable<Country[] | null> {
+  getOlympics(): Observable<Country[] | null> {    
     return this.olympics$.asObservable();
   }
+
+  // Get the number of countries
+  getNumberOfCountries(): number {
+    const countries = this.olympics$.value;
+    return countries ? countries.length : 0;
+  }
+
+  // Get the count of the country with the highest number of participations
+  getNumberOfOlympics(): number {
+    const countries = this.olympics$.value;
+    if (!countries) return 0;
+  
+    return countries.reduce(
+      (max, country) => Math.max(max, country.participations.length),
+      0
+    );
+  }  
 }
