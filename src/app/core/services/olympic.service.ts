@@ -45,5 +45,32 @@ export class OlympicService {
       (max, country) => Math.max(max, country.participations.length),
       0
     );
-  }  
+  }
+
+  // Get the data of a single country
+  getSingleCountry(countryName: string | null): Country {
+    const countries = this.olympics$.value ?? [];
+    let country: Country[] = countries.filter((country) => { 
+      return country.country.trim().toLowerCase() == countryName?.trim().toLowerCase();
+    });
+    return country[0];
+  }
+
+  // Get the number of participations of a country
+  getSingleCountryNumberParticipations(countryName: string | null): number {
+    const country = this.getSingleCountry(countryName);
+    return country.participations?.length;
+  }
+  
+  // Get the number of participations of a country
+  getSingleCountryMedals(countryName: string | null): number {
+    const country = this.getSingleCountry(countryName);
+    return country.participations?.reduce((sum, medals) => sum + medals.medalsCount, 0);
+  }
+
+  // Get the number of participations of a country
+  getSingleCountryAthletes(countryName: string | null): number {
+    const country = this.getSingleCountry(countryName);
+    return country.participations?.reduce((sum, athletes) => sum + athletes.athleteCount, 0);
+  }
 }

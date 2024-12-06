@@ -1,20 +1,21 @@
 <h1>Médailles par pays</h1>
 <div>
-  <div>
+  <div *ngIf="totalEntries && totalEntries > 0">
     <h2>Nombre de JOs</h2>
-    <p>{{totalCountries}}</p>
+    <p>{{totalEntries}}</p>
   </div>
-  <div>
+  <div *ngIf="totalCountries && totalCountries > 0">
     <h2>Nombre de pays</h2>
-    <p>{{numberOfOlympics}}</p>
+    <p>{{totalCountries}}</p>
   </div>
 </div>
 
-<div *ngIf="pieChartData.length > 0">
+<div *ngIf="pieChartData && pieChartData.length > 0">
   <ngx-charts-pie-chart
     [results]="pieChartData"
     [labels]="true"
     [animations]="true"
+    [trimLabels]="false"
     [tooltipTemplate]="customTooltip"
     (select)="selectCountry($event)">
   </ngx-charts-pie-chart>

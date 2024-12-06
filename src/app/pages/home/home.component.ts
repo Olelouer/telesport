@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable, Subject, map } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Country } from 'src/app/core/models/Olympic';
 import { Router } from '@angular/router';
@@ -10,11 +9,12 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public olympics$!: Observable<Country[] | null>;
   public pieChartData: { name: string; value: number }[] = [];
   public totalCountries: number = 0;
-  public numberOfOlympics: number = 0;
+  public totalEntries: number = 0;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private olympicService: OlympicService, 
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.olympicService.loadInitialData().subscribe({
       next: () => {
         this.totalCountries = this.olympicService.getNumberOfCountries();
-        this.numberOfOlympics = this.olympicService.getNumberOfOlympics();
+        this.totalEntries = this.olympicService.getNumberOfOlympics();
       },
       error: (err) => console.error('Failed to load initial data', err),
     });
@@ -52,8 +52,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
   // Route the user to the selected country
   selectCountry(country: { name: string; value: number; label: string }): void {
-    this.router.navigate(['detail-pays', country.name]);
+    const formattedName: string = country.name.toLowerCase();
+    this.router.navigate(['detail-pays', encodeURIComponent(formattedName)]);
   }  
 }

@@ -1,16 +1,30 @@
 <a routerLink="/">Retourner à la page d'accueil</a>
-<h1>country-detail works!</h1>
-<div>
+<div *ngIf="country">
+    <h1>{{country.country}}</h1>
     <div>
-        <h2>Nombre de participations</h2>
-        <!-- <p>{{totalCountries}}</p> -->
+        <div *ngIf="totalEntries && totalAthletes > 0">
+            <h2>Nombre de participations</h2>
+            <p>{{totalEntries}}</p>
+        </div>
+        <div *ngIf="totalEntries && totalAthletes > 0">
+            <h2>Nombre total de médailles</h2>
+            <p>{{totalMedals}}</p>
+        </div>
+        <div *ngIf="totalAthletes && totalAthletes > 0">
+            <h2>Nombre total d'athlètes</h2>
+            <p>{{totalAthletes}}</p>
+        </div>
     </div>
-    <div>
-        <h2>Nombre total de médailles</h2>
-        <!-- <p>{{totalCountries}}</p> -->
-    </div>
-    <div>
-        <h2>Nombre total d'athlètes</h2>
-        <!-- <p>{{numberOfOlympics}}</p> -->
-    </div>
+    <ngx-charts-line-chart
+    [view]="[700, 400]"
+    [results]="lineChartData"
+    [xAxis]="true"
+    [yAxis]="true"
+    [xAxisLabel]="'Dates'"
+    [showXAxisLabel]="true"
+    [animations]="true"
+    [yScaleMin]="0"
+    [yScaleMax]="150"
+    >
+</ngx-charts-line-chart>
 </div>
