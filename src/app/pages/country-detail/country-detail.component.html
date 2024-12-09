@@ -1,6 +1,6 @@
-<a routerLink="/">Retourner à la page d'accueil</a>
+<a routerLink="">Retourner à la page d'accueil</a>
 <div *ngIf="country">
-    <h1>{{country.country}}</h1>
+    <h1 class="page-title">{{country.country}}</h1>
     <div>
         <div *ngIf="totalEntries && totalAthletes > 0">
             <h2>Nombre de participations</h2>
@@ -26,5 +26,5 @@
     [yScaleMin]="0"
     [yScaleMax]="150"
     >
-</ngx-charts-line-chart>
+    </ngx-charts-line-chart>
 </div>
