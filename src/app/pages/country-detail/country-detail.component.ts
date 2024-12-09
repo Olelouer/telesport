@@ -7,7 +7,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-country-detail',
   templateUrl: './country-detail.component.html',
-  styleUrl: './country-detail.component.scss',
 })
 export class CountryDetailComponent implements OnInit, OnDestroy {
   public country : Country | undefined;

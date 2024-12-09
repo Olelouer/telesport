@@ -1,30 +1,33 @@
-<a routerLink="">Retourner à la page d'accueil</a>
-<div *ngIf="country">
-    <h1 class="page-title">{{country.country}}</h1>
-    <div>
-        <div *ngIf="totalEntries && totalAthletes > 0">
-            <h2>Nombre de participations</h2>
-            <p>{{totalEntries}}</p>
+<div class="container">
+    <div *ngIf="country">
+        <div class="title-ctn">
+            <a class="back-link" routerLink=""><i class="icon-arrow">←</i> Retour à la page d'accueil</a>
+            <h1 class="page-title">{{country.country}}</h1>
         </div>
-        <div *ngIf="totalEntries && totalAthletes > 0">
-            <h2>Nombre total de médailles</h2>
-            <p>{{totalMedals}}</p>
+        <div class="blocks-ctn">
+            <cpn-block-number
+                title="Nombre de participations" 
+                [number]="totalEntries"
+            ></cpn-block-number>
+            <cpn-block-number
+                title="Nombre total de médailles" 
+                [number]="totalMedals"
+            ></cpn-block-number>
+            <cpn-block-number
+                title="Nombre total d'athlètes" 
+                [number]="totalAthletes"
+            ></cpn-block-number>
         </div>
-        <div *ngIf="totalAthletes && totalAthletes > 0">
-            <h2>Nombre total d'athlètes</h2>
-            <p>{{totalAthletes}}</p>
-        </div>
+        <ngx-charts-line-chart
+        [results]="lineChartData"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'Dates'"
+        [showXAxisLabel]="true"
+        [animations]="true"
+        [yScaleMin]="0"
+        [yScaleMax]="150"
+        >
+        </ngx-charts-line-chart>
     </div>
-    <ngx-charts-line-chart
-    [view]="[700, 400]"
-    [results]="lineChartData"
-    [xAxis]="true"
-    [yAxis]="true"
-    [xAxisLabel]="'Dates'"
-    [showXAxisLabel]="true"
-    [animations]="true"
-    [yScaleMin]="0"
-    [yScaleMax]="150"
-    >
-    </ngx-charts-line-chart>
 </div>
