@@ -1,23 +1,31 @@
-<div class="container">
-  <h1 class="page-title">Médailles par pays</h1>
-  <div class="blocks-ctn">
-    <cpn-block-number
-      title="Nombre de JOs" 
-      [number]="totalEntries"
-    ></cpn-block-number>
-    <cpn-block-number
-      title="Nombre de pays" 
-      [number]="totalCountries"
-    ></cpn-block-number>
-  </div>
+<div id="homePage">
+  <div class="container">
+    <h1 class="page-title">Médailles par pays</h1>
+    <div class="blocks-ctn">
+      <cpn-block-number
+        title="Nombre de JOs" 
+        [number]="totalEntries"
+      ></cpn-block-number>
+      <cpn-block-number
+        title="Nombre de pays" 
+        [number]="totalCountries"
+      ></cpn-block-number>
+    </div>
 
-  <div *ngIf="pieChartData && pieChartData.length > 0">
-    <ngx-charts-pie-chart
-      [results]="pieChartData"
-      [labels]="true"
-      [animations]="true"
-      [trimLabels]="false"
-      (select)="selectCountry($event)">
-    </ngx-charts-pie-chart>
+    <div *ngIf="pieChartData && pieChartData.length > 0">
+      <ngx-charts-pie-chart
+        [results]="pieChartData"
+        [labels]="true"
+        [animations]="true"
+        [trimLabels]="false"
+        (select)="selectCountry($event)">
+        <ng-template #tooltipTemplate let-model="model">
+          <p class="tooltip-name">{{ model.name }}</p>
+          <span class="tooltip-value">
+            🏅 {{ model.value  }}
+          </span>
+        </ng-template>
+      </ngx-charts-pie-chart>
+    </div>
   </div>
 </div>

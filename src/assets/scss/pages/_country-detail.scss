@@ -1,32 +1,43 @@
-.title-ctn {
-    position: relative;
-
-    .back-link {
-        position: absolute;
-        left: 0;
-        top: 0;
-    }
-}
-
-.ngx-charts-outer {
-
-    .ng-star-inserted {
-        font-size: 16px !important;
-        
-        text {
-            font-size: 30px;
-        }
-    }
-}
-
-@media (max-width: 550px) {
+#countryDetailPage {
     .title-ctn {
         position: relative;
     
         .back-link {
-            position: relative;
+            position: absolute;
             left: 0;
             top: 0;
+        }
+    }
+    
+    .ngx-charts-outer {
+    
+        .ng-star-inserted {
+            font-size: 16px !important;
+            
+            text {
+                font-size: 30px;
+            }
+        }
+    }
+    
+    ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
+        font-size: 20px;
+        background-color: $bg-color;
+    
+        .tooltip-caret.position-right {
+            border-top-color: $bg-color;
+        }
+    }
+    
+    @media (max-width: 550px) {
+        .title-ctn {
+            position: relative;
+        
+            .back-link {
+                position: relative;
+                left: 0;
+                top: 0;
+            }
         }
     }
 }
