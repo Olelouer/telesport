@@ -12,7 +12,7 @@
       ></cpn-block-number>
     </div>
 
-    <div *ngIf="pieChartData && pieChartData.length > 0">
+    <div *ngIf="pieChartData && pieChartData.length > 0" class="chart-ctn">
       <ngx-charts-pie-chart
         [results]="pieChartData"
         [labels]="true"

@@ -8,24 +8,22 @@
             top: 0;
         }
     }
+
+    .chart-ctn {
+        display: flex;
+        height: clamp-calc(250px, 400px);
+
+        .ngx-charts-outer {
     
-    .ngx-charts-outer {
-    
-        .ng-star-inserted {
-            font-size: 16px !important;
-            
-            text {
-                font-size: 30px;
+            .ng-star-inserted {
+                font-size: clamp-calc(14px, 22px) !important;
+                font-family: $primary-font;
+                
+                text {
+                    font-size: clamp-calc(22px, 30px);
+                    font-family: $primary-font;
+                }
             }
-        }
-    }
-    
-    ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
-        font-size: 20px;
-        background-color: $bg-color;
-    
-        .tooltip-caret.position-right {
-            border-top-color: $bg-color;
         }
     }
     

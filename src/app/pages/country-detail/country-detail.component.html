@@ -19,17 +19,19 @@
                     [number]="totalAthletes"
                 ></cpn-block-number>
             </div>
-            <ngx-charts-line-chart
-            [results]="lineChartData"
-            [xAxis]="true"
-            [yAxis]="true"
-            [xAxisLabel]="'Dates'"
-            [showXAxisLabel]="true"
-            [animations]="true"
-            [yScaleMin]="0"
-            [yScaleMax]="150"
-            >
-            </ngx-charts-line-chart>
+            <div *ngIf="lineChartData" class="chart-ctn">
+                <ngx-charts-line-chart
+                    [results]="lineChartData"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    [xAxisLabel]="'Dates'"
+                    [showXAxisLabel]="true"
+                    [animations]="true"
+                    [yScaleMin]="0"
+                    [yScaleMax]="150"
+                    >
+                </ngx-charts-line-chart>
+            </div>
         </div>
     </div>
 </div>

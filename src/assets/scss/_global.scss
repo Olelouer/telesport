@@ -6,24 +6,31 @@
     padding: 0 15px;
 }
 
-// Global h1 style
+// Global titles style
 .page-title {
-    color: white;
-    font-size: clamp(1.375rem, 1.0549rem + 1.3659vw, 2.25rem); // 22 to 36px
+    color: $secondary-color;
+    font-size: clamp-calc(24px, 36px);
     padding: 5px 15px;
     margin: 30px auto;
     border-radius: 10px;
     font-weight: 500;
     background-color: $bg-color;
     max-width: fit-content;
+    font-family: $primary-font;
+}
+
+h2 {
+    font-family: $primary-font;
+    font-size: clamp-calc(22px, 30px);
 }
 
 // Buttons & links
 .back-link {
     font-size: clamp(1rem, 0.9543rem + 0.1951vw, 1.125rem);
     text-decoration: none;
-    color: black;
+    color: $primary-color;
     transition: all ease 0.2s;
+    font-family: $primary-font;
 
     .icon-arrow {
         position: relative;
@@ -44,9 +51,26 @@
 // Create a responsive layout for inline blocks
 .blocks-ctn {
     display: flex;
-    gap: clamp(1.875rem, 1.6463rem + 0.9756vw, 2.5rem); // 30 to 40px
+    gap: clamp-calc(25px, 40px);
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     margin-bottom: 40px;
+}
+
+// Chart global style
+ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
+    font-size: clamp-calc(15px, 20px);
+    padding: 7px 15px;
+    background-color: $bg-color;
+    font-family: $primary-font;
+
+    p {
+        margin: 0;
+        font-family: $primary-font;
+    }
+
+    .tooltip-caret.position-top {
+        border-top-color: $bg-color;
+    }
 }

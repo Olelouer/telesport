@@ -1,5 +1,7 @@
 /* You can import your scss style files here */
+@import '/src/assets/scss/fonts';
 @import '/src/assets/scss/variables';
+@import '/src/assets/scss/mixins';
 @import '/src/assets/scss/global';
 
 
@@ -9,3 +11,4 @@
 // Pages 
 @import '/src/assets/scss/pages/home';
 @import '/src/assets/scss/pages/country-detail';
+@import '/src/assets/scss/pages/not-found';
