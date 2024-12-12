@@ -62,13 +62,13 @@ export class OlympicService {
     return country.participations?.length;
   }
   
-  // Get the number of participations of a country
+  // Get the number of medals of a country
   getSingleCountryMedals(countryName: string | null): number {
     const country = this.getSingleCountry(countryName);
     return country.participations?.reduce((sum, medals) => sum + medals.medalsCount, 0);
   }
 
-  // Get the number of participations of a country
+  // Get the number of athletes of a country
   getSingleCountryAthletes(countryName: string | null): number {
     const country = this.getSingleCountry(countryName);
     return country.participations?.reduce((sum, athletes) => sum + athletes.athleteCount, 0);

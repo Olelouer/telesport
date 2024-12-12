@@ -13,4 +13,10 @@
             }
         }
     }
+
+    .no-data {
+        text-align: center;
+        font-family: $primary-font;
+        font-size: clamp-calc(20px, 28px);
+    }
 }

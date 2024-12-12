@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable,Subject, map } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Country } from 'src/app/core/models/Olympic';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -28,12 +28,14 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
     // Get the country in the param of the router
     this.countryName = decodeURIComponent(this.route.snapshot.paramMap.get('countryName') || '');
 
-    this.olympicService.loadInitialData().subscribe({
+    this.olympicService.loadInitialData()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe({
       next: () => {
         this.country = this.olympicService.getSingleCountry(this.countryName);
         
-        // Redirect user to the homepage if the country doesn't exist
-        if (!this.country) {
+        // Redirect user to the homepage if the country doesn't exist or has no participation
+        if (!this.country || this.country.participations.length == 0) {
           this.router.navigate(['/']);
           return;
         }
@@ -53,7 +55,7 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
         ];                
       },
       error: (err) => console.error('Failed to load initial data', err),
-    });
+      });
   }
 
   ngOnDestroy(): void {

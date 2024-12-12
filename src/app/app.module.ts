@@ -13,6 +13,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 // Components
 import { BlockNumberComponent } from './components/block-number/block-number.component';
+import { JoLoadingComponent } from './components/jo-loading/jo-loading.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { BlockNumberComponent } from './components/block-number/block-number.com
     HomeComponent, 
     CountryDetailComponent,
     NotFoundComponent,
-    BlockNumberComponent
+    BlockNumberComponent,
+    JoLoadingComponent
   ],
   imports: [
     BrowserModule, 

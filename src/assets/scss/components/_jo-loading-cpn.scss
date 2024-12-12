@@ -1,0 +1,39 @@
+#joLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height: 400px;
+
+    .loading-text {
+        font-size: clamp-calc(18px, 20px);
+        margin: 0;
+    }
+
+    .ring {
+        font-size: clamp-calc(40px, 50px);
+        animation: jump 1.5s ease-in-out infinite;
+        display: inline-block;
+
+        &.-blue {
+            color: #0081C8;
+            animation-delay: 0s;
+        }
+        &.-yellow {
+            color: #FCB131;
+            animation-delay: 0.3s;
+        }
+        &.-black {
+            color: #000000;
+            animation-delay: 0.6s;
+        }
+        &.-green {
+            color: #00A651;
+            animation-delay: 0.9s;
+        }
+        &.-red {
+            color: #EE334E;
+            animation-delay: 1.2s;
+        }
+    }
+}

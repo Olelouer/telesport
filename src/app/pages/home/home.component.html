@@ -1,31 +1,52 @@
 <div id="homePage">
   <div class="container">
     <h1 class="page-title">Médailles par pays</h1>
-    <div class="blocks-ctn">
-      <cpn-block-number
-        title="Nombre de JOs" 
-        [number]="totalEntries"
-      ></cpn-block-number>
-      <cpn-block-number
-        title="Nombre de pays" 
-        [number]="totalCountries"
-      ></cpn-block-number>
-    </div>
 
-    <div *ngIf="pieChartData && pieChartData.length > 0" class="chart-ctn">
-      <ngx-charts-pie-chart
-        [results]="pieChartData"
-        [labels]="true"
-        [animations]="true"
-        [trimLabels]="false"
-        (select)="selectCountry($event)">
-        <ng-template #tooltipTemplate let-model="model">
-          <p class="tooltip-name">{{ model.name }}</p>
-          <span class="tooltip-value">
-            🏅 {{ model.value  }}
-          </span>
-        </ng-template>
-      </ngx-charts-pie-chart>
-    </div>
+    <!-- Loading state: Shows loading component while data is being fetched -->
+    <ng-container *ngIf="isLoading">
+      <cpn-jo-loading></cpn-jo-loading>
+    </ng-container>
+
+    <!-- Error state: Displays error message and retry button if data fetch fails -->
+    <ng-container *ngIf="error">
+      <p class="no-data" role="alert">{{ error }}</p>
+      <div class="main-button -primary -centered">
+        <a href="/">Réessayer</a>
+      </div>
+    </ng-container>
+
+    <!-- Content state: Shows statistics and chart when data is loaded successfully -->
+    <ng-container *ngIf="!isLoading && !error">
+      <!-- Statistics blocks showing number of Olympics and countries -->
+      <div class="blocks-ctn">
+        <cpn-block-number
+          [title]="'Nombre de JOs'" 
+          [number]="totalEntries"
+        ></cpn-block-number>
+        <cpn-block-number
+          [title]="'Nombre de pays'" 
+          [number]="totalCountries"
+        ></cpn-block-number>
+      </div>
+
+      <!-- Pie chart displaying medals per country -->
+      <div class="chart-ctn">
+        <ngx-charts-pie-chart
+          [results]="pieChartData"
+          [labels]="true"
+          [animations]="true"
+          [trimLabels]="false"
+          (select)="selectCountry($event)">
+          <!-- Custom tooltip template for the pie chart -->
+          <ng-template #tooltipTemplate let-model="model">
+            <p class="tooltip-name">{{ model.name }}</p>
+            <span class="tooltip-value">
+              🏅 {{ model.value  }}
+            </span>
+          </ng-template>
+        </ngx-charts-pie-chart>
+      </div>
+    </ng-container>
+
   </div>
 </div>

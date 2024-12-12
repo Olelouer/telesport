@@ -1,3 +1,7 @@
+h1, h2, h3, h4, p, span, a {
+    font-family: $primary-font;
+}
+
 // Global container style
 .container {
     max-width: 1000px;
@@ -16,27 +20,28 @@
     font-weight: 500;
     background-color: $bg-color;
     max-width: fit-content;
-    font-family: $primary-font;
 }
 
 h2 {
-    font-family: $primary-font;
     font-size: clamp-calc(22px, 30px);
 }
 
 // Buttons & links
+a {
+    text-decoration: none;
+}
+
 .back-link {
     font-size: clamp(1rem, 0.9543rem + 0.1951vw, 1.125rem);
     text-decoration: none;
     color: $primary-color;
-    transition: all ease 0.2s;
-    font-family: $primary-font;
+    transition: $quick-transition;
 
     .icon-arrow {
         position: relative;
         left: 0;
         margin-right: 5px;
-        transition: all ease 0.2s;
+        transition: $quick-transition;
     }
 
     &:hover {
@@ -44,6 +49,30 @@ h2 {
 
         .icon-arrow {
             left: -5px;
+        }
+    }
+}
+
+.main-button {
+    &.-centered {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &.-primary {
+        a {
+            color: $secondary-color;
+            padding: clamp-calc(12px, 15px) clamp-calc(15px, 20px);
+            border-radius: 10px;
+            background-color: $bg-color;
+            font-size: clamp-calc(15px, 20px);
+            transition: $quick-transition;
+            font-weight: 600;
+
+            &:hover {
+                opacity: 0.8;
+            }
         }
     }
 }
@@ -58,7 +87,7 @@ h2 {
     margin-bottom: 40px;
 }
 
-// Chart global style
+// Charts global style
 ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
     font-size: clamp-calc(15px, 20px);
     padding: 7px 15px;
@@ -67,7 +96,6 @@ ngx-tooltip-content.ngx-charts-tooltip-content.type-tooltip {
 
     p {
         margin: 0;
-        font-family: $primary-font;
     }
 
     .tooltip-caret.position-top {

@@ -3,9 +3,10 @@
 @import '/src/assets/scss/variables';
 @import '/src/assets/scss/mixins';
 @import '/src/assets/scss/global';
-
+@import '/src/assets/scss/animations';
 
 // Components
+@import '/src/assets/scss/components/jo-loading-cpn';
 @import '/src/assets/scss/components/block-number-cpn';
 
 // Pages 
