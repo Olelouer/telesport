@@ -1,0 +1,14 @@
+.redirect-home-cpn {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .redirect-text {
+        font-size: clamp-calc(18px, 22px);
+        font-weight: 600;
+    }
+}
+  

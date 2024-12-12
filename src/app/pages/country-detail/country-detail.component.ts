@@ -9,13 +9,25 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './country-detail.component.html',
 })
 export class CountryDetailComponent implements OnInit, OnDestroy {
-  public country : Country | undefined;
+  // Component state management
+  public isLoading: boolean = false;
+  public error: boolean = false;
+
+  // Country data from the service
+  public country: Country | undefined;
+  
+  // Data structure for line chart visualization
   public lineChartData: { name: string; series: { name: string; value: number }[] }[] = [];
-  public totalEntries : number = 0;
+  
+  // Statistics counters
+  public totalEntries: number = 0;
   public totalMedals: number = 0;
   public totalAthletes: number = 0;
-
-  private countryName: string | null = "";
+  
+  // URL parameter for country name
+  private countryName: string = '';
+  
+  // Subject for managing subscriptions
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -25,42 +37,64 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // Get the country in the param of the router
+    this.isLoading = true;
+
+    /** Get and decode country name from URL parameters */
     this.countryName = decodeURIComponent(this.route.snapshot.paramMap.get('countryName') || '');
 
-    this.olympicService.loadInitialData()
+    /** Initializes component data by loading country details and preparing chart data */
+    this.olympicService
+    .loadInitialData()
     .pipe(takeUntil(this.destroy$))
     .subscribe({
       next: () => {
         this.country = this.olympicService.getSingleCountry(this.countryName);
-        
-        // Redirect user to the homepage if the country doesn't exist or has no participation
-        if (!this.country || this.country.participations.length == 0) {
+
+        if (!this.isValidCountry()) {
           this.router.navigate(['/']);
           return;
         }
-        this.totalEntries = this.olympicService.getSingleCountryNumberParticipations(this.countryName);
-        this.totalMedals = this.olympicService.getSingleCountryMedals(this.countryName);
-        this.totalAthletes = this.olympicService.getSingleCountryAthletes(this.countryName);
 
-        // Map data for ngx-charts
-        this.lineChartData = [
-          {
-            name: 'Médailles',
-            series: this.country.participations.map((participation) => ({
-              name: participation.year.toString(),
-              value: participation.medalsCount,
-            })),
-          },
-        ];                
+        this.loadCountryStatistics();
+        this.prepareChartData();
+        this.isLoading = false;
       },
-      error: (err) => console.error('Failed to load initial data', err),
-      });
+      error: (err) => {
+        console.error('Failed to load country data', err)
+        this.error = true;
+        this.isLoading = false;
+      }
+    });    
   }
 
+  /** Cleanup component */
   ngOnDestroy(): void {
-    // Unsubscribe the services
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  /** Checks if country exists and has participations */
+  private isValidCountry(): boolean {
+    return !!this.country && this.country.participations.length > 0;
+  }
+
+  /** Loads statistical data for the country */
+  private loadCountryStatistics(): void {
+    this.totalEntries = this.olympicService.getSingleCountryNumberParticipations(this.countryName);
+    this.totalMedals = this.olympicService.getSingleCountryMedals(this.countryName);
+    this.totalAthletes = this.olympicService.getSingleCountryAthletes(this.countryName);
+  }
+
+  /** Prepares data for the line chart visualization */
+  private prepareChartData(): void {
+    if (!this.country) return;
+
+    this.lineChartData = [{
+      name: 'Médailles',
+      series: this.country.participations.map((participation) => ({
+        name: participation.year.toString(),
+        value: participation.medalsCount,
+      })),
+    }];
   }
 }

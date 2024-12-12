@@ -8,12 +8,14 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
 })
 export class HomeComponent implements OnInit, OnDestroy {
-  // Component state handling
+  // Component state management
   public isLoading: boolean = false;
   public error: string | null = null;
 
   // Data structure for pie chart visualization
   public pieChartData: { name: string; value: number }[] = [];
+
+  // Statistics counters
   public totalCountries: number = 0;
   public totalEntries: number = 0;
 
@@ -32,8 +34,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     .pipe(
       takeUntil(this.destroy$),
       switchMap(() => {
-        this.totalCountries = this.olympicService.getNumberOfCountries();
-        this.totalEntries = this.olympicService.getNumberOfOlympics();
+        this.loadCountryStatistics();
         return this.olympicService.getOlympics();
       }),
        // Transform country data to pie chart format
@@ -65,10 +66,16 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
   
-  /** Cleanup to prevent memory leaks */
+  /** Cleanup component */
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+   /** Loads statistical data for the Olympics */
+   private loadCountryStatistics(): void {
+    this.totalCountries = this.olympicService.getNumberOfCountries();
+    this.totalEntries = this.olympicService.getNumberOfOlympics();
   }
 
   /**

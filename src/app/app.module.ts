@@ -14,6 +14,7 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
 // Components
 import { BlockNumberComponent } from './components/block-number/block-number.component';
 import { JoLoadingComponent } from './components/jo-loading/jo-loading.component';
+import { RedirectHomeComponent } from './components/redirect-home/redirect-home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { JoLoadingComponent } from './components/jo-loading/jo-loading.component
     CountryDetailComponent,
     NotFoundComponent,
     BlockNumberComponent,
-    JoLoadingComponent
+    JoLoadingComponent,
+    RedirectHomeComponent
   ],
   imports: [
     BrowserModule, 

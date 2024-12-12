@@ -1,10 +1,26 @@
 <div id="countryDetailPage">
     <div class="container">
-        <div *ngIf="country">
+        <!-- Loading state: Shows loading component while data is being fetched -->
+        <ng-container *ngIf="isLoading">
+            <cpn-jo-loading></cpn-jo-loading>
+        </ng-container>
+
+        <!-- Error state: Displays error message and retry button if data fetch fails -->
+        <ng-container *ngIf="error">
+            <redirect-home-cpn
+                [text]="'Il n\'y pas de données disponibles pour ce pays.'"
+            >
+            </redirect-home-cpn>
+        </ng-container>
+
+        <!-- Content state: Shows statistics and chart when data is loaded successfully -->
+        <ng-container *ngIf="!isLoading && country">
             <div class="title-ctn">
                 <a class="back-link" routerLink=""><i class="icon-arrow">←</i> Retour à la page d'accueil</a>
                 <h1 class="page-title">{{country.country}}</h1>
             </div>
+
+            <!-- Statistics blocks showing number of Olympics and countries -->
             <div class="blocks-ctn">
                 <cpn-block-number
                     title="Nombre de participations" 
@@ -19,6 +35,8 @@
                     [number]="totalAthletes"
                 ></cpn-block-number>
             </div>
+
+            <!-- Line chart displaying country's medals -->
             <div *ngIf="lineChartData" class="chart-ctn">
                 <ngx-charts-line-chart
                     [results]="lineChartData"
@@ -32,6 +50,6 @@
                     >
                 </ngx-charts-line-chart>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>

@@ -30,7 +30,7 @@
       </div>
 
       <!-- Pie chart displaying medals per country -->
-      <div class="chart-ctn">
+      <div *ngIf="pieChartData" class="chart-ctn">
         <ngx-charts-pie-chart
           [results]="pieChartData"
           [labels]="true"
