@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "country": "Italy",
+    "country": "Italie",
     "participations": [
       {
         "id": 1,
@@ -28,7 +28,7 @@
   },
   {
     "id": 2,
-    "country": "Spain",
+    "country": "Espagne",
     "participations": [
       {
         "id": 1,
@@ -55,7 +55,7 @@
   },
   {
     "id": 3,
-    "country": "United States",
+    "country": "États-Unis",
     "participations": [
       {
         "id": 1,
@@ -82,7 +82,7 @@
   },
   {
     "id": 4,
-    "country": "Germany",
+    "country": "Allemagne",
     "participations": [
       {
         "id": 1,

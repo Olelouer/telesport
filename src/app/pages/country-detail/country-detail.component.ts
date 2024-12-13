@@ -3,6 +3,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 import { Country } from 'src/app/core/models/Olympic';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-country-detail',
@@ -33,7 +34,8 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
   constructor(
     private olympicService: OlympicService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,9 @@ export class CountryDetailComponent implements OnInit, OnDestroy {
           this.router.navigate(['/']);
           return;
         }
+
+        
+        this.titleService.setTitle(`${this.country.country} - Télésport`);
 
         this.loadCountryStatistics();
         this.prepareChartData();

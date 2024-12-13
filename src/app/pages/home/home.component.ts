@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, map, takeUntil, switchMap } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,10 +26,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private olympicService: OlympicService, 
     private router: Router,
+    private titleService: Title,
   ) {}
 
   ngOnInit(): void {
     this.isLoading = true;
+
+    this.titleService.setTitle('Accueil - Télésport');
   
     this.olympicService.loadInitialData()
     .pipe(
